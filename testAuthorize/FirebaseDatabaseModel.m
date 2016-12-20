@@ -9,7 +9,6 @@
 
 #import "FirebaseDatabaseModel.h"
 
-@import Firebase;
 
 @interface FirebaseDatabaseModel()
 @property(strong, nonatomic) FIRDatabaseReference *ref;
@@ -63,12 +62,13 @@
 }
 
 - (void) retreiveRegisterDataByQueryIDString : (NSString*) IDString
-                                     Success : (void (^) ()) success
+                                     Success : (void (^) (FIRDataSnapshot * data)) success
                                      Failure : (void (^)(NSError *error)) failure
 {
     
     [[[[_ref child:@"registerUsers"] queryOrderedByChild:@"userID"] queryEqualToValue:IDString] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSLog(@"Snapshot: %@", snapshot);
+        success(snapshot);
     }];
     
     

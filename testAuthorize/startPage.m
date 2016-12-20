@@ -17,6 +17,7 @@
 
 @interface startPage ()
 @property (strong, nonatomic) IBOutlet UIButton *FBLoginBtn;
+@property (strong, nonatomic) IBOutlet UITextField *autherizedCodeTextField;
 
 @end
 
@@ -32,18 +33,18 @@
     
     // Handle clicks on the button
     
-    if ([FBSDKAccessToken currentAccessToken]) { // User is logged in, do work such as go to next view
-        
-        [_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
-        
-        [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:@"sprewell20051116" Success:^{
-            NSLog(@"%s", __PRETTY_FUNCTION__);
-        } Failure:^(NSError *error) {
-            NSLog(@"%s", __PRETTY_FUNCTION__);
-        }];
-        
-    }
-    
+//    if ([FBSDKAccessToken currentAccessToken]) { // User is logged in, do work such as go to next view
+//        
+//        [_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
+//        [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:[[FBSDKAccessToken currentAccessToken].userID sha1]
+//                                                                         Success:^(FIRDataSnapshot *data) {
+//                                                                             NSLog(@"id= %@", [[FBSDKAccessToken currentAccessToken].userID sha1]);
+//                                                                         } Failure:^(NSError *error) {
+//                                                                             
+//                                                                         }];
+//        
+//    }
+//    
     
     [_FBLoginBtn
      addTarget:self
@@ -63,69 +64,98 @@
 -(void)loginButtonClicked
 {
     
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-
-    if ([FBSDKAccessToken currentAccessToken]) { // User is logged in, do work such as go to next view
     
-        [login logOut];
-        [_FBLoginBtn setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
-
+    NSLog(@"TODO: look for authorized code user in Firebase");
     
-    } else {
+    if ((_autherizedCodeTextField.text.length != 0) || ([_autherizedCodeTextField.text isEqualToString:@"0000"])) {
         
-        NSLog(@"TODO: look for authorized code user in Firebase");
-
+        [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:[[FBSDKAccessToken currentAccessToken].userID sha1]
+                                                                         Success:^(FIRDataSnapshot *data) {
+                                                                             
+                                                                             if (data) {
+                                                                                 [self loginProcess];
+                                                                             }
+                                                                             
+                                                                         } Failure:^(NSError *error) {
+                                                                             
+                                                                         }];
         
         
-        [login logInWithReadPermissions: @[@"public_profile"] fromViewController:self
-                                handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                    
-             if (error) {
-                 NSLog(@"Process error");
-             } else if (result.isCancelled) {
-                 NSLog(@"Cancelled");
-                 
-             } else {
-                 NSLog(@"Logged in");
-                 
-                 [_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
-                 
-                 if ([FBSDKAccessToken currentAccessToken]) {
-
-                     FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
-                     [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
-                         if(error) {
-                             NSLog(@"login to Firebase error");
-                             return;
-                         } else {
-                             
-                             NSLog(@"Try to add user data to realtime database");
-                             //[_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
-                             
-                             NSString *userID = [[FBSDKAccessToken currentAccessToken] userID];
-                             
-                             
-                             [[FirebaseDatabaseModel getInstance] addRegisterDataWithRegisterIDString:[userID sha1]
-                                                                                              Success:^{
-                                 NSLog(@"ok userid = %@", [userID sha1]);
-                                 [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
-                                 
-                             } Failure:^(NSError *error) {
-                                 NSLog(@"failed");
-                             }];
-                             
-                         }
-                     }];
-                 } else {
-                     NSLog(@"%s, something wrong", __PRETTY_FUNCTION__);
-                 }
-
-             }
-         }];
-
+        
     }
     
     
+    
+    
+}
+
+-(void) loginProcess
+{
+    
+    
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    
+    [login logInWithReadPermissions: @[@"public_profile"] fromViewController:self
+                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                
+                                if (error) {
+                                    NSLog(@"Process error");
+                                } else if (result.isCancelled) {
+                                    NSLog(@"Cancelled");
+                                    
+                                } else {
+                                    NSLog(@"Logged in");
+                                    
+                                    [_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
+                                    
+                                    if ([FBSDKAccessToken currentAccessToken]) {
+                                        
+                                        FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
+                                        [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+                                            if(error) {
+                                                NSLog(@"login to Firebase error");
+                                                return;
+                                            } else {
+                                                
+                                                NSLog(@"Try to add user data to realtime database");
+                                                //[_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
+                                                
+                                                NSString *userID = [[FBSDKAccessToken currentAccessToken] userID];
+                                                
+                                                [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:[[FBSDKAccessToken currentAccessToken].userID sha1]
+                                                                                                                 Success:^(FIRDataSnapshot *data) {
+                                                                                                                     
+                                                if (data) {
+                                                    NSLog(@"no need to add registration code");
+                                                    [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
+                                                } else {
+                                                    NSLog(@"add registration code");
+
+                                                    [[FirebaseDatabaseModel getInstance] addRegisterDataWithRegisterIDString:[userID sha1]
+                                                    Success:^{
+                                                        NSLog(@"ok userid = %@", [userID sha1]);
+                                                        [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
+                                                    } Failure:^(NSError *error) {
+                                                        NSLog(@"failed");
+                                                    }];
+                                                }
+                                                                                                                     
+                                                } Failure:^(NSError *error) {
+                                                }];
+                                                
+                                                
+
+                                                
+                                            }
+                                        }];
+                                    } else {
+                                        NSLog(@"%s, something wrong", __PRETTY_FUNCTION__);
+                                    }
+                                    
+                                }
+                            }];
+    
+
 }
 
 

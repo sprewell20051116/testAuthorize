@@ -13,6 +13,7 @@
 		106F22B31E04F49E00D403FF /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106F22B21E04F49E00D403FF /* baseViewController.m */; };
 		106F22B61E04F4AC00D403FF /* startPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 106F22B51E04F4AC00D403FF /* startPage.m */; };
 		106F22B91E04F9FE00D403FF /* FirebaseDatabaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 106F22B71E04F9FE00D403FF /* FirebaseDatabaseModel.m */; };
+		109450861E0983AD002702C7 /* logoutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 109450851E0983AD002702C7 /* logoutPage.m */; };
 		10BD75D11E018F4100EF4A79 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10BD75D01E018F4100EF4A79 /* GoogleService-Info.plist */; };
 		10D812991E018EDC00F12D13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D812981E018EDC00F12D13 /* main.m */; };
 		10D8129C1E018EDC00F12D13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D8129B1E018EDC00F12D13 /* AppDelegate.m */; };
@@ -55,6 +56,8 @@
 		106F22B51E04F4AC00D403FF /* startPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = startPage.m; sourceTree = "<group>"; };
 		106F22B71E04F9FE00D403FF /* FirebaseDatabaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseDatabaseModel.m; sourceTree = "<group>"; };
 		106F22B81E04F9FE00D403FF /* FirebaseDatabaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseDatabaseModel.h; sourceTree = "<group>"; };
+		109450841E0983AD002702C7 /* logoutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logoutPage.h; sourceTree = "<group>"; };
+		109450851E0983AD002702C7 /* logoutPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = logoutPage.m; sourceTree = "<group>"; };
 		10BD75D01E018F4100EF4A79 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10D812941E018EDC00F12D13 /* testAuthorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testAuthorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D812981E018EDC00F12D13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				10D8129B1E018EDC00F12D13 /* AppDelegate.m */,
 				106F22B41E04F4AC00D403FF /* startPage.h */,
 				106F22B51E04F4AC00D403FF /* startPage.m */,
+				109450841E0983AD002702C7 /* logoutPage.h */,
+				109450851E0983AD002702C7 /* logoutPage.m */,
 				10D812A01E018EDC00F12D13 /* Main.storyboard */,
 				10D812A61E018EDC00F12D13 /* Assets.xcassets */,
 				10D812A81E018EDC00F12D13 /* LaunchScreen.storyboard */,
@@ -391,6 +396,7 @@
 				102BFA451E080D7200E7C9B6 /* NSString+Hashes.m in Sources */,
 				10D8129C1E018EDC00F12D13 /* AppDelegate.m in Sources */,
 				106F22AD1E04D49E00D403FF /* baseTabbarViewController.m in Sources */,
+				109450861E0983AD002702C7 /* logoutPage.m in Sources */,
 				10D812991E018EDC00F12D13 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

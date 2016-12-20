@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import Firebase;
 
 @interface FirebaseDatabaseModel : NSObject
 + (instancetype) getInstance;
@@ -35,7 +36,7 @@
 
 
 - (void) retreiveRegisterDataByQueryIDString : (NSString*) IDString
-                                     Success : (void (^) ()) success
+                                     Success : (void (^) (FIRDataSnapshot * data)) success
                                      Failure : (void (^)(NSError *error)) failure;
 
 @end

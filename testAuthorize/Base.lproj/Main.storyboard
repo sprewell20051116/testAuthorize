@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1EU-Gq-AxV">
-                                <rect key="frame" x="16" y="313.5" width="343" height="40"/>
+                                <rect key="frame" x="16" y="166" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ud6-Ui-e6I"/>
                                 </constraints>
@@ -33,13 +33,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorize Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVx-tF-neI">
-                                <rect key="frame" x="16" y="288.5" width="343" height="20"/>
+                                <rect key="frame" x="16" y="138" width="343" height="20"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                 <color key="textColor" red="0.37254901959999998" green="0.36862745099999999" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NpL-he-JWh">
-                                <rect key="frame" x="87" y="445" width="200" height="44"/>
+                                <rect key="frame" x="87" y="234" width="200" height="44"/>
                                 <color key="backgroundColor" red="0.22537201642990112" green="0.34264656901359558" blue="0.60412263870239258" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="MEv-Sj-wL3"/>
@@ -53,9 +53,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ZVx-tF-neI" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="0wZ-Ce-eBp"/>
-                            <constraint firstItem="1EU-Gq-AxV" firstAttribute="top" secondItem="ZVx-tF-neI" secondAttribute="bottom" constant="5" id="6sK-O7-OFy"/>
-                            <constraint firstItem="NpL-he-JWh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="7/5" id="AzW-6j-a20"/>
-                            <constraint firstItem="1EU-Gq-AxV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FiQ-Sp-hkv"/>
+                            <constraint firstItem="1EU-Gq-AxV" firstAttribute="top" secondItem="ZVx-tF-neI" secondAttribute="bottom" constant="8" id="6sK-O7-OFy"/>
+                            <constraint firstItem="NpL-he-JWh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="7/5" constant="-210.89999999999998" id="AzW-6j-a20"/>
+                            <constraint firstItem="1EU-Gq-AxV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-147.5" id="FiQ-Sp-hkv"/>
                             <constraint firstItem="1EU-Gq-AxV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="K2Z-y3-puT"/>
                             <constraint firstItem="ZVx-tF-neI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="QdR-Qc-QiS"/>
                             <constraint firstItem="1EU-Gq-AxV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="nt1-cl-1Wi"/>
@@ -65,6 +65,7 @@
                     <navigationItem key="navigationItem" id="u6X-86-azP"/>
                     <connections>
                         <outlet property="FBLoginBtn" destination="NpL-he-JWh" id="Qmg-cs-YJs"/>
+                        <outlet property="autherizedCodeTextField" destination="1EU-Gq-AxV" id="its-d2-x35"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -93,7 +94,7 @@
         <!--Item 1-->
         <scene sceneID="pov-2M-0y2">
             <objects>
-                <viewController id="bNQ-Aw-Iog" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logoutPage" id="bNQ-Aw-Iog" customClass="logoutPage" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RfY-XR-QG2"/>
                         <viewControllerLayoutGuide type="bottom" id="5nt-N3-L4X"/>
@@ -101,13 +102,49 @@
                     <view key="view" contentMode="scaleToFill" id="TxM-5l-aXv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your registration code. Share to friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1Q-kY-Ec7">
+                                <rect key="frame" x="16" y="28" width="343" height="20"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kG3-lf-PoJ">
+                                <rect key="frame" x="160" y="317.5" width="54" height="32"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <state key="normal" title="Log out"/>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="registrationcode" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bXV-rr-SqN">
+                                <rect key="frame" x="16" y="233.5" width="343" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="SjM-e6-NAh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="o1Q-kY-Ec7" firstAttribute="trailing" secondItem="TxM-5l-aXv" secondAttribute="trailingMargin" id="1dP-Lu-V1d"/>
+                            <constraint firstItem="kG3-lf-PoJ" firstAttribute="centerX" secondItem="TxM-5l-aXv" secondAttribute="centerX" id="LEW-MR-pfw"/>
+                            <constraint firstItem="kG3-lf-PoJ" firstAttribute="centerY" secondItem="TxM-5l-aXv" secondAttribute="centerY" id="PvE-n8-OIq"/>
+                            <constraint firstItem="o1Q-kY-Ec7" firstAttribute="leading" secondItem="TxM-5l-aXv" secondAttribute="leadingMargin" id="e0u-XI-eaX"/>
+                            <constraint firstItem="kG3-lf-PoJ" firstAttribute="top" secondItem="bXV-rr-SqN" secondAttribute="bottom" constant="50" id="ebU-ka-srg"/>
+                            <constraint firstItem="bXV-rr-SqN" firstAttribute="leading" secondItem="TxM-5l-aXv" secondAttribute="leadingMargin" id="hys-gS-SZE"/>
+                            <constraint firstItem="o1Q-kY-Ec7" firstAttribute="top" secondItem="RfY-XR-QG2" secondAttribute="bottom" constant="8" id="s8J-ts-3Er"/>
+                            <constraint firstItem="bXV-rr-SqN" firstAttribute="trailing" secondItem="TxM-5l-aXv" secondAttribute="trailingMargin" id="uz0-vf-mUv"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="GkP-gV-v4a"/>
+                    <connections>
+                        <outlet property="logoutBtn" destination="kG3-lf-PoJ" id="hOF-Bz-lgB"/>
+                        <outlet property="registrationCode" destination="bXV-rr-SqN" id="E1p-dN-8Q9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cy4-3N-vbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1855.2" y="174.96251874062969"/>
+            <point key="canvasLocation" x="916" y="106.59670164917542"/>
         </scene>
         <!--Base Tabbar View Controller-->
         <scene sceneID="ko4-Ko-P4F">

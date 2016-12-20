@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "startPage.h"
+#import "baseTabbarViewController.h"
 
 @import Firebase;
 
@@ -24,6 +26,25 @@
 
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    
+    if ([FBSDKAccessToken currentAccessToken] == nil) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                 bundle: nil];
+        
+        startPage *TutorPage = [mainStoryboard instantiateViewControllerWithIdentifier:@"startPage"];
+        self.window.rootViewController = TutorPage;
+        
+    } else {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                 bundle: nil];
+        
+        baseTabbarViewController *tabbarPage = [mainStoryboard instantiateViewControllerWithIdentifier:@"baseTabbarViewController"];
+        self.window.rootViewController = tabbarPage;
+        
+    }
+
+    
+    
     
     return YES;
 }

@@ -25,7 +25,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) showPageWithStoryboardIDString : (NSString*) ViewControllerIDString
+- (void) showPageWithStoryboardIDString : (NSString * _Nonnull) ViewControllerIDString
                           withAnimation : (BOOL) animation
                              completion : (void (^ __nullable)(void))completion
 {
@@ -37,6 +37,29 @@
     [self presentViewController:destinationPage animated:YES completion:completion];
 }
 
+- (void) showSimpleAlertWithTitleString : (NSString *) titleString
+                          MessageString : (NSString *) messageStr
+                              BtnString : (NSString *) btnString
+                           andBtnAction : (void (^ __nullable)(UIAlertAction *action)) action
+{
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleString
+                                                                   message:messageStr
+                                                            preferredStyle:  UIAlertControllerStyleAlert];
+    
+    
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:btnString
+                                style:UIAlertActionStyleDefault
+                                handler:action];
+
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:true completion:nil];
+
+}
 
 /*
 #pragma mark - Navigation
