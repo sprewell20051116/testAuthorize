@@ -16,6 +16,7 @@
 @import FirebaseAuth;
 
 @interface startPage ()
+@property (strong, nonatomic) NSString *tempUserID;
 @property (strong, nonatomic) IBOutlet UIButton *FBLoginBtn;
 @property (strong, nonatomic) IBOutlet UITextField *autherizedCodeTextField;
 
@@ -44,7 +45,17 @@
 //                                                                         }];
 //        
 //    }
-//    
+//
+    
+    // use Anonymous accoun
+    
+    [[FIRAuth auth]
+     signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+         NSLog(@"log in as anonymous");
+         BOOL isAnonymous = user.anonymous;  // YES
+         _tempUserID = user.uid;
+     }];
+
     
     [_FBLoginBtn
      addTarget:self
@@ -69,11 +80,14 @@
     
     if ((_autherizedCodeTextField.text.length != 0) || ([_autherizedCodeTextField.text isEqualToString:@"0000"])) {
         
-        [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:[[FBSDKAccessToken currentAccessToken].userID sha1]
+        [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:_autherizedCodeTextField.text
                                                                          Success:^(FIRDataSnapshot *data) {
+                                                                             NSLog(@"data = %@", data);
                                                                              
-                                                                             if (data) {
+                                                                             if ((data.hasChildren) || [_autherizedCodeTextField.text isEqualToString:@"0000"]) {
                                                                                  [self loginProcess];
+                                                                             } else {
+                                                                                 NSLog(@"Not to log in");
                                                                              }
                                                                              
                                                                          } Failure:^(NSError *error) {
@@ -110,6 +124,8 @@
                                     
                                     if ([FBSDKAccessToken currentAccessToken]) {
                                         
+                                        // Try to add facebook account to Firebase auth
+                                        
                                         FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
                                         [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
                                             if(error) {
@@ -125,7 +141,7 @@
                                                 [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:[[FBSDKAccessToken currentAccessToken].userID sha1]
                                                                                                                  Success:^(FIRDataSnapshot *data) {
                                                                                                                      
-                                                if (data) {
+                                                if (data.hasChildren) {
                                                     NSLog(@"no need to add registration code");
                                                     [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
                                                 } else {
