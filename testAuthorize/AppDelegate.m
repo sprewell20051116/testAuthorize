@@ -88,6 +88,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    
+    //[Casper] Delete the anonymous user
+    FIRUser *user = [FIRAuth auth].currentUser;
+    if ((nil != user) && (user.anonymous)) {
+        [user deleteWithCompletion:nil];
+    }
+    
 }
 
 

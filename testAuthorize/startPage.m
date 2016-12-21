@@ -84,10 +84,22 @@
                                                                          Success:^(FIRDataSnapshot *data) {
                                                                              NSLog(@"data = %@", data);
                                                                              
-                                                                             if ((data.hasChildren) || [_autherizedCodeTextField.text isEqualToString:@"0000"]) {
-                                                                                 [self loginProcess];
-                                                                             } else {
-                                                                                 NSLog(@"Not to log in");
+                                                                             NSLog(@"[Casper] Delete the anonymous user ");
+                                                                             FIRUser *user = [FIRAuth auth].currentUser;
+                                                                             if (user.anonymous) {
+                                                                                 [user deleteWithCompletion:^(NSError *_Nullable error) {
+                                                                                     if (error) {
+                                                                                         // An error happened.
+                                                                                     } else {
+                                                                                         // Account deleted.
+                                                                                         if ((data.hasChildren) || [_autherizedCodeTextField.text isEqualToString:@"0000"]) {
+                                                                                             [self loginProcess];
+                                                                                         } else {
+                                                                                             NSLog(@"Not to log in");
+                                                                                         }
+                                                                                         
+                                                                                     }
+                                                                                 }];
                                                                              }
                                                                              
                                                                          } Failure:^(NSError *error) {
@@ -135,10 +147,13 @@
                                                 return;
                                             } else {
                                                 
-                                                [[FIRAuth auth]
-                                                 .currentUser linkWithCredential:credential
+                                                
+                                                
+                                                [[FIRAuth auth].currentUser linkWithCredential:credential
                                                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                                                     NSLog(@"Facebook login success and link current user");
+                                                     NSLog(@"Facebook login success and link current user ");
+                                                     
+                                                     
                                                  }];
                                                 
                                                 
