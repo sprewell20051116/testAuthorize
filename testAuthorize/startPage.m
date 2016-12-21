@@ -127,35 +127,45 @@
                                         // Try to add facebook account to Firebase auth
                                         
                                         FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
+                                        
+                                        
                                         [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
                                             if(error) {
                                                 NSLog(@"login to Firebase error");
                                                 return;
                                             } else {
                                                 
+                                                [[FIRAuth auth]
+                                                 .currentUser linkWithCredential:credential
+                                                 completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+                                                     NSLog(@"Facebook login success and link current user");
+                                                 }];
+                                                
+                                                
                                                 NSLog(@"Try to add user data to realtime database");
-                                                //[_FBLoginBtn setTitle:@"Log out" forState:UIControlStateNormal];
                                                 
                                                 NSString *userID = [[FBSDKAccessToken currentAccessToken] userID];
                                                 
                                                 [[FirebaseDatabaseModel getInstance] retreiveRegisterDataByQueryIDString:[[FBSDKAccessToken currentAccessToken].userID sha1]
-                                                                                                                 Success:^(FIRDataSnapshot *data) {
+                                                Success:^(FIRDataSnapshot *data) {
                                                                                                                      
-                                                if (data.hasChildren) {
-                                                    NSLog(@"no need to add registration code");
-                                                    [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
-                                                } else {
-                                                    NSLog(@"add registration code");
-
-                                                    [[FirebaseDatabaseModel getInstance] addRegisterDataWithRegisterIDString:[userID sha1]
-                                                    Success:^{
-                                                        NSLog(@"ok userid = %@", [userID sha1]);
+                                                    if (data.hasChildren) {
+                                                        NSLog(@"no need to add registration code");
                                                         [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
-                                                    } Failure:^(NSError *error) {
-                                                        NSLog(@"failed");
-                                                    }];
-                                                }
-                                                                                                                     
+                                                    } else {
+                                                        NSLog(@"add registration code");
+
+                                                        [[FirebaseDatabaseModel getInstance] addRegisterDataWithRegisterIDString:[userID sha1]
+                                                        Success:^{
+                                                            NSLog(@"ok userid = %@", [userID sha1]);
+                                                            [self showPageWithStoryboardIDString:@"baseTabbarViewController" withAnimation:YES completion:nil];
+                                                        } Failure:^(NSError *error) {
+                                                            NSLog(@"failed");
+                                                        }];
+                                                    }
+                                                    
+                                                    
+                                                    
                                                 } Failure:^(NSError *error) {
                                                 }];
                                                 
