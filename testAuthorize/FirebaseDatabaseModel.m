@@ -71,10 +71,42 @@
         success(snapshot);
     }];
     
-    
+}
+
+- (void) loginAsAnomymounSuccess : (void (^) (FIRUser * user)) success
+                         Failure :(void (^)(NSError *error)) failure
+
+{
+    [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        if(error) {
+            failure(error);
+        } else {
+            success(user);
+        }
+    }];
 
 }
 
+- (FIRUser *) getcurrentUser
+{
+    return [FIRAuth auth].currentUser;
+}
+
+
+- (void) deleteCurrentUserSuccess : (void (^) ()) success
+                          Failure :(void (^)(NSError *error)) failure
+{
+    [[self getcurrentUser] deleteWithCompletion:^(NSError *_Nullable error) {
+        if (error) {
+            // An error happened.
+            failure(error);
+        } else {
+            // Account deleted.
+            success();
+        
+        }
+    }];
+}
 
 //
 //
@@ -86,8 +118,8 @@
 //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //    [formatter setDateFormat:@"YYYYMMdd-HHmmss"];
 //    NSString *DateString = [formatter stringFromDate:[NSDate date]];
-// 
-//    
+//
+//
 //    [[[_ref child:@"emotionData"]
 //      child:DateString] setValue:DataDic withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
 //        if (error) {
@@ -96,7 +128,7 @@
 //            success();
 //        }
 //    }];
-//    
+//
 //}
 //
 //
@@ -104,7 +136,7 @@
 //- (void) readValue
 //{
 //    [[_ref child:@"notificationHistory"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//        
+//
 //        NSMutableArray *returnData = [NSMutableArray new];
 //        
 //        NSLog(@"snapshot = %@", snapshot);

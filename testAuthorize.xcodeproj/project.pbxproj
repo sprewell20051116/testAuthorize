@@ -23,6 +23,7 @@
 		10D812AA1E018EDC00F12D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10D812A81E018EDC00F12D13 /* LaunchScreen.storyboard */; };
 		10D812B51E018EDC00F12D13 /* testAuthorizeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D812B41E018EDC00F12D13 /* testAuthorizeTests.m */; };
 		10D812C01E018EDC00F12D13 /* testAuthorizeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D812BF1E018EDC00F12D13 /* testAuthorizeUITests.m */; };
+		10EA287C1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EA287B1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.m */; };
 		D8EA5014775F400A3ADE8CD3 /* libPods-testAuthorize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 777E152AD8EFB0F66A3B240D /* libPods-testAuthorize.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,8 @@
 		10D812BB1E018EDC00F12D13 /* testAuthorizeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testAuthorizeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D812BF1E018EDC00F12D13 /* testAuthorizeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testAuthorizeUITests.m; sourceTree = "<group>"; };
 		10D812C11E018EDC00F12D13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10EA287A1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FirebaseDatabaseModel+FBLogin.h"; sourceTree = "<group>"; };
+		10EA287B1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FirebaseDatabaseModel+FBLogin.m"; sourceTree = "<group>"; };
 		42FA455983B8D133BAF2A227 /* Pods-testAuthorize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testAuthorize.release.xcconfig"; path = "Pods/Target Support Files/Pods-testAuthorize/Pods-testAuthorize.release.xcconfig"; sourceTree = "<group>"; };
 		5709C454BD96EE05B9062207 /* Pods-testAuthorize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testAuthorize.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testAuthorize/Pods-testAuthorize.debug.xcconfig"; sourceTree = "<group>"; };
 		777E152AD8EFB0F66A3B240D /* libPods-testAuthorize.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testAuthorize.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +156,8 @@
 				106F22B71E04F9FE00D403FF /* FirebaseDatabaseModel.m */,
 				102BFA431E080D7200E7C9B6 /* NSString+Hashes.h */,
 				102BFA441E080D7200E7C9B6 /* NSString+Hashes.m */,
+				10EA287A1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.h */,
+				10EA287B1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.m */,
 			);
 			path = testAuthorize;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				106F22B61E04F4AC00D403FF /* startPage.m in Sources */,
+				10EA287C1E0C2B96008965D4 /* FirebaseDatabaseModel+FBLogin.m in Sources */,
 				106F22B91E04F9FE00D403FF /* FirebaseDatabaseModel.m in Sources */,
 				106F22B31E04F49E00D403FF /* baseViewController.m in Sources */,
 				106F22B01E04F41C00D403FF /* baseNavViewController.m in Sources */,

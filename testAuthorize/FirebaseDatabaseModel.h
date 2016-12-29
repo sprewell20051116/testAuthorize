@@ -39,4 +39,12 @@
                                      Success : (void (^) (FIRDataSnapshot * data)) success
                                      Failure : (void (^)(NSError *error)) failure;
 
+- (void) loginAsAnomymounSuccess : (void (^) (FIRUser * user)) success
+                         Failure :(void (^)(NSError *error)) failure;
+
+- (FIRUser *) getcurrentUser;
+
+- (void) deleteCurrentUserSuccess : (void (^) ()) success
+                          Failure :(void (^)(NSError *error)) failure;
+
 @end
